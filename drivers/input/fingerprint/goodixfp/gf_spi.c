@@ -61,7 +61,7 @@
 #define GF_SPIDEV_NAME     "goodix,fingerprint"
 /*device name after register in charater*/
 #define GF_DEV_NAME            "goodix_fp"
-#define	GF_INPUT_NAME	    "qwerty"	/*"goodix_fp" */
+#define	GF_INPUT_NAME	    "uinput-gestures"	/*"goodix_fp" */
 
 #define	CHRD_DRIVER_NAME	"goodix_fp_spi"
 #define	CLASS_NAME		    "goodix_fp"
@@ -75,6 +75,7 @@ static DEFINE_MUTEX(device_list_lock);
 static struct wake_lock fp_wakelock;
 static struct gf_dev gf;
 
+#if 0
 struct gf_key_map maps[] = {
 	{ EV_KEY, GF_KEY_INPUT_HOME },
 	{ EV_KEY, GF_KEY_INPUT_MENU },
@@ -91,6 +92,23 @@ struct gf_key_map maps[] = {
 	{ EV_KEY, GF_NAV_INPUT_LONG_PRESS },
 	{ EV_KEY, GF_NAV_INPUT_HEAVY },
 #endif
+};
+#endif
+
+struct gf_key_map maps[] = {
+		{ EV_KEY, KEY_HOME },
+		{ EV_KEY, KEY_MENU },
+		{ EV_KEY, KEY_BACK },
+		{ EV_KEY, KEY_POWER },
+		{ EV_KEY, KEY_UP },
+		{ EV_KEY, KEY_DOWN },
+		{ EV_KEY, KEY_RIGHT },
+		{ EV_KEY, KEY_LEFT },
+		{ EV_KEY, KEY_CAMERA },
+		{ EV_KEY, KEY_F9 },
+		{ EV_KEY, KEY_F19 },
+		{ EV_KEY, KEY_ENTER},
+		{ EV_KEY, KEY_KPENTER },
 };
 
 #ifndef USE_COMMON_FP

@@ -1045,8 +1045,15 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
 			F2FS_I(new_dentry->d_inode)->i_projid)))
 		return -EXDEV;
 
-	f2fs_balance_fs(sbi);
-
+	err = dquot_initialize(old_dir);
+	if (err)
+		goto out;
+	
+	err = dquot_initialize(new_dir);
+	if (err)
+		goto out;
+	
+	err = -ENOENT;
 	old_entry = f2fs_find_entry(old_dir, &old_dentry->d_name, &old_page);
 	if (!old_entry) {
 		if (IS_ERR(old_page))
